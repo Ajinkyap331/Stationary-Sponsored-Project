@@ -1,16 +1,9 @@
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 
-// export const EmployeeModel = mongoose.model('employee-model', new mongoose.Schema({
-//     name: String,
-//     username: String,
-//     password: String
-// }))
+const ProductSchema = mongoose.Schema({
+    name: String,
+    barcode: String,
+    count: Number
+})
 
-// export const ProductModel = mongoose.model('barcode-model', new mongoose.Schema({
-//     name: String,
-//     count: Number,
-//     barcode: String,
-//     inDate: Date,
-//     outDate: Date,
-//     price: Number
-// }))
+export default mongoose.model('product', ProductSchema)
