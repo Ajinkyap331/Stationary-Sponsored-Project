@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState, useRef } from "react";
-import axios from "axios";
 import { update } from "../API/calls";
+import { ReactNotifications } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { DisplayNotification } from "../API/resolvecall";
 
 export const Scanner = () => {
   const counter = useRef();
@@ -10,22 +12,17 @@ export const Scanner = () => {
 
   const [code, setcode] = useState("");
 
-  //   const p = new Promise((resolve, reject) => {
-
-  //   });
-
-  //   p.then((_code) => {
-  //     console.log(_code);
-  //     setcode(_code);
-  //   });
   let _code = "";
+
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
-      if (e.key == "Enter") {
-        console.log(update(inoutproduct.current, _code, counter.current.value));
-        setcode(_code)
+      if (e.key === "Enter") {
+        update(inoutproduct.current, _code, counter.current.value).then(
+          (message) => DisplayNotification(message, counter.current.value)
+        );
+        setcode(_code);
         _code = "";
-      } else if (e.key != "Shift" && e.key != "Alt") {
+      } else if (e.key !== "Shift" && e.key !== "Alt") {
         _code += e.key;
       }
     });
@@ -46,10 +43,11 @@ export const Scanner = () => {
           (inoutproduct.current = event.target.value === "in" ? true : false)
         }
       >
-        <input type="radio" value="in" name="gender" /> IN
-        <input type="radio" value="out" name="gender" /> OUT
+        <input type="radio" value="in" name="" /> IN
+        <input type="radio" value="out" name="" /> OUT
       </div>
       <div>Code : {code}</div>
+      <ReactNotifications />
     </div>
   );
 };

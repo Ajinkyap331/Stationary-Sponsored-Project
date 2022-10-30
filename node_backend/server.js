@@ -42,14 +42,14 @@ app.post('/add', (req, res) => {
     if (req.body.incBy !== undefined)
         Product.findOneAndUpdate({ "barcode": req.body.barcode }, { $inc: { count: parseInt(req.body.incBy) } }, (err, data) => {
             if (err) res.send(err)
-            else if (!data) res.send("Invalid Barcode")
-            else res.send("Updated Success")
+            else if (!data) res.status(204).send("Invalid Barcode")
+            else res.status(200).send("Updated Success")
         })
     else {
         Product.findOneAndUpdate({ "barcode": req.body.barcode }, { $inc: { count: - parseInt(req.body.decBy) } }, (err, data) => {
             if (err) res.send(err)
-            else if (!data) res.send("Invalid Barcode")
-            else res.send("Updated Success")
+            else if (!data) res.status(204).send("Invalid Barcode")
+            else res.status(200).send("Updated Success")
         })
     }
 })

@@ -14,7 +14,7 @@ export const AllProducts = () => {
       {products ? (
         products.map((e, i) => {
           return (
-            <section>
+            <section id = {e.barcode}>
               <h4>Product {i+1}</h4>
               <div>Name : {e.name}</div>
               <div>Barcode : {e.barcode}</div>
