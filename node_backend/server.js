@@ -1,12 +1,12 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import Product from "./models.js";
 import cors from "cors"
 
 const app = express()
 const port = process.env.PORT || 9000
 
-const uri = "mongodb+srv://admin:admin@cluster0.c7v5d8z.mongodb.net/databasenew?retryWrites=true&w=majority"
+const uri = "mongodb+srv://admin:newadmin@cluster0.c7v5d8z.mongodb.net/databasenew?retryWrites=true&w=majority"
 
 mongoose.connect(uri)
 
