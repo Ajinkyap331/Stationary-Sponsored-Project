@@ -2,27 +2,28 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const AllProducts = () => {
-  const [products, setp] = useState(false);
-
-  useEffect(() => {
-    axios.get("http://localhost:9000/").then((resp) => setp(resp.data));
-  }, []);
-
+export const AllProducts = ({ products }) => {
   return (
     <div>
       {products ? (
-        products.map((e, i) => {
-          return (
-            <section id = {e.barcode}>
-              <h4>Product {i+1}</h4>
-              <div>Name : {e.name}</div>
-              <div>Barcode : {e.barcode}</div>
-              <div>Count : {e.count}</div>
-              <br />
-            </section>
-          );
-        })
+        <div>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Barcode</th>
+              <th>Count</th>
+            </tr>
+            {products.map((e, i) => {
+              return (
+                <tr className="text-center" id={e.barcode}>
+                  <td className="p-3">{e.name}</td>
+                  <td className="p-3">{e.barcode}</td>
+                  <td className="p-3">{e.count}</td>
+                </tr>
+              );
+            })}
+          </table>
+        </div>
       ) : (
         <>Loading...</>
       )}

@@ -1,16 +1,27 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from './Pages/Home';
-import { AllProducts } from './Pages/AllProducts';
+import { AddProducts } from './Pages/AddProducts';
+import { useState } from 'react';
+import { Login } from './Pages/Login';
+import { Transactions } from './Pages/Transactions';
 
 function App() {
+
+  const [data, setdata] = useState({
+    code: "",
+    products: [],
+    login: false
+  });
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/all" element={<AllProducts />} />
+          <Route exact path="/" element={<Home data={data} setdata={setdata} />} />
+          <Route exact path="/addproduct" element={<AddProducts data={data} setdata={setdata} />} />
+          <Route exact path="/login" element={<Login data={data} setdata={setdata} />} />
+          <Route exact path="/transactions" element={<Transactions />} />
         </Routes>
       </div>
     </Router>
