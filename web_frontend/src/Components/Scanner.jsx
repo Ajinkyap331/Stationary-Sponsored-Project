@@ -65,10 +65,22 @@ export const Scanner = ({ data, setdata, products }) => {
 
   const ProductDetails = (
     <>
-      <section className="p-10 border rounded-lg">
-        <div>Product Details</div>
-        <div>Code : {data.code}</div>
-      </section>
+      <table className="min-w-full border text-center text-sm font-light dark:border-neutral-200">
+        <thead className="border-b font-medium dark:border-neutral-200">
+          <tr>
+            <th className="border-r px-6 py-4 dark:border-neutral-200">
+              Product Code
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="border-b dark:border-neutral-200">
+            <td className="border-r px-6 py-4 dark:border-neutral-200">
+              {data.code ? data.code : "Not Fetched"}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 
@@ -108,8 +120,8 @@ export const Scanner = ({ data, setdata, products }) => {
   );
 
   return (
-    <div>
-      <div className="flex flex-col gap-10 ">
+    <div className="bg-hero-pattern bg-cover bg-no-repeat gap-10">
+      <div className="flex flex-col items-center justify-center  gap-10 ">
         {ProductDetails}
         <div className="flex gap-6">
           {InOutProduct}
@@ -153,7 +165,7 @@ export const Scanner = ({ data, setdata, products }) => {
                         );
                     });
                 }}
-                className="border px-2  rounded-lg"
+                className="border px-2 transform transition duration-500 hover:scale-110 rounded-lg"
               >
                 UPDATE
               </button>
@@ -161,7 +173,10 @@ export const Scanner = ({ data, setdata, products }) => {
           </section>
         </div>
 
-        <Link className="border px-4 py-2 w-max rounded-lg" to="/addproduct">
+        <Link
+          className="border px-4 py-2 w-max transform transition duration-500 hover:scale-110 rounded-lg"
+          to="/addproduct"
+        >
           <button>ADD New Product</button>
         </Link>
       </div>

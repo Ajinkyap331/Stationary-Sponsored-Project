@@ -1,32 +1,49 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Navbar } from "../Components/Navbar";
 
 export const AllProducts = ({ products }) => {
   return (
-    <div>
-      {products ? (
-        <div>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Barcode</th>
-              <th>Count</th>
-            </tr>
-            {products.map((e, i) => {
-              return (
-                <tr className="text-center" id={e.barcode}>
-                  <td className="p-3">{e.name}</td>
-                  <td className="p-3">{e.barcode}</td>
-                  <td className="p-3">{e.count}</td>
+    <>
+      <Navbar />
+      <div className="flex justify-center items-center p-4">
+        {products ? (
+          <div className="p-4">
+            <table className="min-w-full text-left text-sm font-light">
+              <thead className="border-b font-medium dark:border-neutral-500 ">
+                <tr>
+                  <th className="px-6 py-4">No.</th>
+                  <th className="px-6 py-4">Name</th>
+                  <th className="px-6 py-4">Barcode</th>
+                  <th className="px-6 py-4">Count</th>
                 </tr>
-              );
-            })}
-          </table>
-        </div>
-      ) : (
-        <>Loading...</>
-      )}
-    </div>
+              </thead>
+              <tbody>
+                {products.map((e, i) => {
+                  return (
+                    <tr
+                      className="border-b dark:border-neutral-500"
+                      id={e.barcode}
+                    >
+                      <td className="whitespace-nowrap px-6 py-4 font-medium">
+                        {i + 1}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">{e.name}</td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        {e.barcode}
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">{e.count}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <>Loading...</>
+        )}
+      </div>
+    </>
   );
 };

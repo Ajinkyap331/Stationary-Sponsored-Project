@@ -3,13 +3,14 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { Navbar } from "../Components/Navbar";
 
 export const Transactions = () => {
   const [trans, sett] = useState({ original: false, edited: false });
 
   useEffect(() => {
     axios.get("http://localhost:9000/alltransactions").then((data) => {
-      sett(trans => ({...trans, original : data.data }));
+      sett((trans) => ({ ...trans, original: data.data }));
     });
   }, []);
 
@@ -28,24 +29,27 @@ export const Transactions = () => {
   };
 
   return (
-    <div className="bg-stone-900 text-white w-screen text-center">
-      <section className="flex gap-5 w-screen justify-center">
+    <div className="bg-stone-900 text-white text-center">
+      <section>
+        <Navbar />
+      </section>
+      <section className="flex flex-col items-center gap-2 p-2 justify-center">
         <input
           onChange={handleDate}
           ref={date}
-          className="text-black"
+          className="text-white text-center rounded-3xl px-4 py-2  hover:bg-black"
           type="date"
         />
         <button
           onClick={() => {
             axios.get("http://localhost:9000/alltransactions").then((data) => {
-              sett(trans => ({...trans, original : data.data }));
+              sett((trans) => ({ ...trans, original: data.data }));
             });
             sett((trans) => ({ ...trans, edited: false }));
           }}
-          className="border p-2"
+          className="border rounded-3xl text-black border-black px-4 py-2 bg-violet-500 hover:bg-violet-600 active:bg-violet-700 hover:text-white hover:border-white focus:outline-none focus:ring focus:ring-violet-300"
         >
-          Refresh
+          Fetch
         </button>
       </section>
       <section className="flex w-screen justify-evenly py-5">
@@ -92,4 +96,3 @@ export const Transactions = () => {
     </div>
   );
 };
- 

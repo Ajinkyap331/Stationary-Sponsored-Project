@@ -18,11 +18,10 @@ export const Home = ({ data, setdata }) => {
   }, []);
 
   return (
-    <div className="bg-stone-900 text-white">
-      <Navbar/>
-      <div className="flex w-screen h-screen justify-evenly items-center ">
+    <div className="bg-stone-900 text-white overflow-hidden">
+      <Navbar />
+      <div className="flex w-screen h-screen justify-evenly items-center flex-col">
         <Scanner data={data} setdata={setdata} products={data.products} />
-        <AllProducts products={data.products} />
       </div>
     </div>
   );
